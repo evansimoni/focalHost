@@ -51,5 +51,9 @@ angular.module('myApp.controllers', [])
     auth.$login('password', $scope.user).then(function(data) {
       console.log(data);
     });
-  }
+  };
+
+  $scope.logout = function() {
+    auth.$logout();
+  };
 }]);
