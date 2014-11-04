@@ -30,5 +30,7 @@ angular.module('myApp.controllers', [])
       name: party.name
     }
     textMessages.$add(newTextMessage);
+    party.notified = 'Yes';
+    $scope.parties.$save(party.$id);
   };
 }]);
