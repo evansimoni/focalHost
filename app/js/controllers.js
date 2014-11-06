@@ -6,9 +6,9 @@ angular.module('myApp.controllers', [])
 .controller('LandingPageController', [function() {
 
 }])
-.controller('WaitlistController', ['$scope', '$firebase', function($scope, $firebase) {
+.controller('WaitlistController', ['$scope', '$firebase', 'FIREBASE_URL', function($scope, $firebase, FIREBASE_URL) {
   // Connect $scope.parties to live Firebase data
-  var partiesRef = new Firebase('https://focalhost.firebaseio.com/parties');
+  var partiesRef = new Firebase(FIREBASE_URL + 'parties');
   $scope.parties = $firebase(partiesRef);
 
   // Object to store data from the Waitlist form
@@ -22,7 +22,7 @@ angular.module('myApp.controllers', [])
 
   // Function to send text message to a party
   $scope.sendTextMessage = function(party) {
-    var textMessageRef = new Firebase('https://focalhost.firebaseio.com/textMessages');
+    var textMessageRef = new Firebase(FIREBASE_URL + 'textMessages');
     var textMessages = $firebase(textMessageRef);
     var newTextMessage = {
       phoneNumber: party.phone,
@@ -34,8 +34,8 @@ angular.module('myApp.controllers', [])
     $scope.parties.$save(party.$id);
   };
 }])
-.controller('AuthController', ['$scope', '$firebaseSimpleLogin', '$location', function($scope, $firebaseSimpleLogin, $location) {
-  var authRef = new Firebase('https://focalhost.firebaseio.com/');
+.controller('AuthController', ['$scope', '$firebaseSimpleLogin', '$location', 'FIREBASE_URL', 'authService', function($scope, $firebaseSimpleLogin, $location, FIREBASE_URL, authService) {
+  var authRef = new Firebase(FIREBASE_URL);
   var auth = $firebaseSimpleLogin(authRef)
 
   $scope.user = {email: '', password: ''};
@@ -48,10 +48,7 @@ angular.module('myApp.controllers', [])
   };
 
   $scope.login = function() {
-    auth.$login('password', $scope.user).then(function(data) {
-      console.log(data);
-      $location.path('/waitlist');
-    });
+    authService.login($scope.user);
   };
 
   $scope.logout = function() {
