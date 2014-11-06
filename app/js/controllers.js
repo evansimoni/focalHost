@@ -50,14 +50,12 @@ angular.module('myApp.controllers', [])
   $scope.login = function() {
     auth.$login('password', $scope.user).then(function(data) {
       console.log(data);
-      // redirect to waitlist page
-      $location.path('/waitlist')
+      $location.path('/waitlist');
     });
   };
 
   $scope.logout = function() {
     auth.$logout();
-    // redirect to landing page
-    $location.path('/')
+    $location.path('/');
   };
 }]);
