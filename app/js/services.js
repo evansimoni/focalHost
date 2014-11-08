@@ -26,13 +26,15 @@ angular.module('myApp.services', [])
 
   var textMessageServiceObject = {
     sendTextMessage: function(party) {
-      phoneNumber: party.phone,
-      size: party.size,
-      name: party.name
+      var newTextMessage = {
+        phoneNumber: party.phone,
+        size: party.size,
+        name: party.name
+      };
+      textMessages.$add(newTextMessage);
+      party.notified = 'Yes';
+      partyService.parties.$save(party.$id)
     }
-    textMessages.$add(newTextMessage);
-    party.notified = 'Yes';
-    partyService.parties.$save(party.$id)
   };
 
   return textMessageServiceObject;
