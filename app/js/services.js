@@ -2,14 +2,18 @@
 
 /* Services */
 
-
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
 .value('FIREBASE_URL', 'https://focalhost.firebaseio.com/')
-.factory('partyService', function($firebase, FIREBASE_URL) {
-  var partiesRef = new Firebase(FIREBASE_URL + 'parties');
-  var parties = $firebase(partiesRef);
+.factory('dataService', function($firebase, FIREBASE_URL) {
+  var dataRef = new Firebase(FIREBASE_URL);
+  var fireData = $firebase(dataRef);
+  return fireData;
+})
+
+.factory('partyService', function(dataService) {
+  var parties = dataService.$child('parties');
 
   var partyServiceObject = {
     parties: parties,
@@ -18,11 +22,11 @@ angular.module('myApp.services', [])
     }
   }
 
-  return partyServiceObject
+  return partyServiceObject;
 })
-.factory('textMessageService', function($firebase, FIREBASE_URL, partyService) {
-  var textMessageRef = new Firebase(FIREBASE_URL + 'textMessages');
-  var textMessages = $firebase(textMessageRef);
+
+.factory('textMessageService', function(dataService, partyService) {
+  var textMessages = dataService.$child('textMessages');
 
   var textMessageServiceObject = {
     sendTextMessage: function(party) {
@@ -36,13 +40,13 @@ angular.module('myApp.services', [])
       partyService.parties.$save(party.$id)
     }
   };
-
   return textMessageServiceObject;
-
 })
+
 .factory('authService', function($firebaseSimpleLogin, $location, $rootScope, FIREBASE_URL) {
   var authRef = new Firebase(FIREBASE_URL);
   var auth = $firebaseSimpleLogin(authRef);
+
   var authServiceObject = {
     register: function(user) {
       auth.$createUser(user.email, user.password).then(function(data) {
