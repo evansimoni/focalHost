@@ -1,20 +1,26 @@
 <form ng-submit="saveParty()" class="form-inline party-form" role="form">
+  <p>Name</p>
   <div class="form-group">
     <label class="sr-only" for="partyName">Party name</label>
-    <input ng-model="newParty.name" type="text" class="form-control" id="partyName" placeholder="Name">
+    <input ng-model="newParty.name" type="text" class="form-control" id="partyName" placeholder="Evan">
   </div>
-  <div class="form-group">
-    <label class="sr-only" for="phoneNumber">Phone number</label>
-    <input ng-model="newParty.phone" type="text" class="form-control" id="phoneNumber" placeholder="Phone (+15551234567)">
-  </div>
+  <br><br>
+  <p>Party Size</p>
   <div class="form-group">
     <label class="sr-only" for="sizeOfParty">Size of party</label>
-    <input ng-model="newParty.size" type="text" class="form-control" id="sizeOfParty" placeholder="Size of party">
+    <input ng-model="newParty.size" type="text" class="form-control" id="sizeOfParty" placeholder="4">
   </div>
-  <button type="submit" class="btn btn-primary">Add party</button>
+  <br><br>
+  <p>Phone Number (must follow 11 digit format: 1 555 234 6789)</p>
+  <div class="form-group">
+    <label class="sr-only" for="phoneNumber">Phone number</label>
+    <input ng-model="newParty.phone" type="text" class="form-control" id="phoneNumber" placeholder="15552346789">
+  </div>
+  <br><br>
+  <button type="submit" class="btn btn-default">Add party</button>
 </form>
 
-<table class="table table-striped table-bordered">
+<table class="table">
   <thead>
     <tr>
       <th>Done?</th>
@@ -38,7 +44,7 @@
       </div>
     </td>
     <td>
-      <button ng-click="sendTextMessage(party)" type="submit" class="btn btn-success">Send SMS</button> 
+      <button ng-click="sendTextMessage(party)" type="submit" class="btn btn-primary">Send SMS</button> 
       <button ng-click="parties.$remove(party.$id)" type="submit" class="btn btn-danger">Remove</button>
     </td>
   </tr>
