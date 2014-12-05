@@ -1,7 +1,9 @@
 body {
-  background: url(../img/restaurant.jpg);
+  background: url(../img/restaurant.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;;
 }
 body,
 h1,
@@ -27,4 +29,7 @@ a {
 }
 a:hover {
   color: #aaa;
+}
+.footer {
+  margin-top: 100px;
 }
