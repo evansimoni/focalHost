@@ -30,6 +30,7 @@ a {
 a:hover {
   color: #aaa;
   text-decoration: none;
+  background-color: transparent;
 }
 .footer {
   margin-top: 100px;
