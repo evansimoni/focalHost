@@ -35,3 +35,34 @@ a:hover {
 .footer {
   margin-top: 100px;
 }
+
+/*  MEDIA QUERIES  */
+@media only screen and (max-width: 640px) {
+  body {
+    padding-top: 40px;
+  }
+  .starter-template h1 {
+    font-size: 3em;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  h4 {
+    font-size: 1.3em;
+  }
+  p {
+    font-size: 1em;
+  }
+  .content {
+    padding: 14px;
+  }
+  .paddingtop {
+    padding-top: 14px;
+  }
+  .footer {
+  margin-top: 30px;
+}
+}
